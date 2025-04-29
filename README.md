@@ -36,14 +36,13 @@ A full-stack form builder application that allows users to create, manage, and s
 
 ```bash
 cd Frontend
+```
 
 2. Set up environment variables:
 
 Create a `.env` file in the root directory and add the following variables:
-```bash
 VITE_API_URL=URL_ADDRESS
 
-```
 
 3. Install dependencies:
 
