@@ -26,7 +26,7 @@ A full-stack form builder application that allows users to create, manage, and s
 ### Installation
 
 1. Clone the repository:
-   ```bash
+
    git clone https://github.com/Kumarankit101/Forms.git
    cd Forms
 
@@ -76,7 +76,6 @@ e
 3. Set up environment variables:
 
 Create a `.env` file in the root directory and add the following variables:
-```bash
 DATABASE_URL=your_database_url
 JWT_SECRET=your_jwt_secret
 
