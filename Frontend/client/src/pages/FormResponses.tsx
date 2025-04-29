@@ -154,7 +154,6 @@ const FormResponses = () => {
   const parsedResponses = responses?.map(response => {
     try {
       console.log("Raw response answers:", response.answers);
-      // Handle different possible formats of answers
       let parsedAnswers;
       if (typeof response.answers === 'string') {
         parsedAnswers = JSON.parse(response.answers);
@@ -257,7 +256,6 @@ const FormResponses = () => {
         </CardContent>
       </Card>
       
-      {/* Delete Confirmation Dialog */}
       <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>

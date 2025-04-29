@@ -29,8 +29,6 @@ const QuestionItem = ({
   const questionTypes = [
     { value: 'text', label: 'Text' },
     { value: 'dropdown', label: 'Dropdown' },
-    { value: 'number', label: 'Number' },
-    { value: 'email', label: 'Email' },
   ];
 
   const handleQuestionTypeChange = (type: QuestionType) => {

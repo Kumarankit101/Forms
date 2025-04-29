@@ -44,7 +44,7 @@ const FormList = () => {
     refetchOnWindowFocus: true,
   });
   
-  // Delete form mutation
+  // Delete form 
   const { mutate: deleteForm, isPending: isDeleting } = useMutation({
     mutationFn: async (formId: number) => {
       const response = await apiRequest('DELETE', `/api/forms/${formId}`);
@@ -136,7 +136,7 @@ const FormList = () => {
 
       <Card className="mb-8">
         <CardHeader className="border-b border-gray-200 px-6 py-4">
-          <h3 className="font-medium text-gray-700">Recent Forms</h3>
+          <h3 className="font-medium text-gray-700">Forms List</h3>
         </CardHeader>
         <CardContent className="p-0">
           {isLoading ? (
@@ -192,7 +192,7 @@ const FormList = () => {
                     >
                       <EyeIcon className="h-5 w-5" />
                     </Button>
-                    <Button
+                    {/* <Button
                       variant="ghost"
                       size="icon"
                       className="text-gray-600 hover:text-primary hover:bg-primary/10 rounded-full"
@@ -200,7 +200,7 @@ const FormList = () => {
                       onClick={(e) => handleEdit(form.id, e)}
                     >
                       <PencilIcon className="h-5 w-5" />
-                    </Button>
+                    </Button> */}
                     <Button
                       variant="ghost"
                       size="icon"

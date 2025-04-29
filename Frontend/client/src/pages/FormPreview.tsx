@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card'
 import { ArrowLeft } from 'lucide-react';
 import { apiRequest } from '@/lib/queryClient';
 import { useToast } from '@/hooks/use-toast';
-import { isValidEmail } from '@/lib/utils';
 import FormQuestionRenderer from '@/components/FormQuestionRenderer';
 import SuccessMessage from '@/components/SuccessMessage';
 import { FormWithQuestions } from '@shared/schema';
@@ -38,12 +37,6 @@ const FormPreview = () => {
         form.questions.forEach(question => {
           if (question.required && (!answers[question.id] || answers[question.id].trim() === '')) {
             newErrors[question.id] = 'This field is required';
-            hasErrors = true;
-          } else if (question.type === 'email' && answers[question.id] && !isValidEmail(answers[question.id])) {
-            newErrors[question.id] = 'Please enter a valid email address';
-            hasErrors = true;
-          } else if (question.type === 'number' && answers[question.id] && isNaN(Number(answers[question.id]))) {
-            newErrors[question.id] = 'Please enter a valid number';
             hasErrors = true;
           }
         });

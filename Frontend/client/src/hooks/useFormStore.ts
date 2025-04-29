@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { QuestionWithOptions } from '@shared/schema';
 
-export type QuestionType = 'text' | 'dropdown' | 'number' | 'email';
+export type QuestionType = 'text' | 'dropdown';
 
 export interface FormQuestion {
   id?: number;

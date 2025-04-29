@@ -48,26 +48,7 @@ const FormQuestionRenderer = ({
             </SelectContent>
           </Select>
         );
-      case 'number':
-        return (
-          <Input
-            type="number"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            required={question.required}
-            className={error ? 'border-destructive' : ''}
-          />
-        );
-      case 'email':
-        return (
-          <Input
-            type="email"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            required={question.required}
-            className={error ? 'border-destructive' : ''}
-          />
-        );
+    
       default:
         return (
           <Input

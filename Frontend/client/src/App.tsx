@@ -20,7 +20,6 @@ function Router() {
       <ProtectedRoute path="/create" component={CreateForm} />
       <ProtectedRoute path="/edit/:id" component={CreateForm} />
       <ProtectedRoute path="/form/:id/responses" component={FormResponses} />
-      {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
   );
