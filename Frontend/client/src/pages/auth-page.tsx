@@ -204,6 +204,9 @@ export default function AuthPage() {
               </TabsList>
 
               <TabsContent value="login">
+                <div className="mb-4 text-center text-sm text-muted-foreground">
+                  For demo use credentials: <strong>user1</strong> / <strong>password1</strong>
+                </div>
                 <Form {...loginForm}>
                   <form
                     onSubmit={loginForm.handleSubmit(onLoginSubmit)}
