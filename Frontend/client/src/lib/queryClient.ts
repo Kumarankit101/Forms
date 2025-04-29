@@ -7,7 +7,7 @@ async function throwIfResNotOk(res: Response) {
   }
 }
 
-// Get token from localStorage
+// Get token 
 const getAuthToken = (): string | null => {
   return localStorage.getItem('auth_token');
 };
@@ -17,7 +17,6 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  // Add token to headers if available
   const headers: Record<string, string> = {
     ...(data ? { "Content-Type": "application/json" } : {})
   };
@@ -43,7 +42,6 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    // Add authorization header with JWT token if available
     const headers: Record<string, string> = {};
     const token = getAuthToken();
     

@@ -21,15 +21,12 @@ const FormPreview = () => {
   
   const { toast } = useToast();
 
-  // Fetch form data
   const { data: form, isLoading, isError } = useQuery<FormWithQuestions>({
     queryKey: [`/api/forms/${formId}`],
   });
 
-  // Submit form response mutation
   const { mutate: submitResponse, isPending: isSubmitting } = useMutation({
     mutationFn: async () => {
-      // Validate required fields
       const newErrors: Record<number, string> = {};
       let hasErrors = false;
       
@@ -76,7 +73,7 @@ const FormPreview = () => {
       [questionId]: value
     }));
     
-    // Clear error if field is filled
+    
     if (errors[questionId]) {
       setErrors(prev => {
         const newErrors = { ...prev };

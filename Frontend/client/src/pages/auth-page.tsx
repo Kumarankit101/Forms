@@ -10,7 +10,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -165,7 +164,6 @@ export default function AuthPage() {
       
       const data = await response.json();
       
-      // Save token to localStorage
       localStorage.setItem('auth_token', data.token);
       
       toast({
@@ -173,7 +171,6 @@ export default function AuthPage() {
         description: `Welcome, ${data.user.username}!`,
       });
       
-      // Redirect to home page
       window.location.href = '/';
     } catch (error) {
       console.error('Registration error:', error);
@@ -189,7 +186,6 @@ export default function AuthPage() {
 
   return (
     <div className="flex min-h-screen">
-      {/* Left Column - Auth Form */}
       <div className="flex-1 flex items-center justify-center p-6 bg-background">
         <Card className="w-full max-w-md">
           <CardHeader>
@@ -332,7 +328,6 @@ export default function AuthPage() {
         </Card>
       </div>
 
-      {/* Right Column - Hero Section */}
       <div className="hidden md:flex flex-1 items-center justify-center p-10 bg-gradient-to-br from-primary/90 to-indigo-600">
         <div className="max-w-lg text-white">
           <h1 className="text-4xl font-bold mb-6">Create Amazing Forms</h1>

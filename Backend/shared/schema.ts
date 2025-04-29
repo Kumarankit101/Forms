@@ -22,7 +22,7 @@ export const QuestionSchema = z.object({
   id: z.number().optional(),
   formId: z.number(),
   text: z.string().min(1, "Question text is required"),
-  type: z.enum(["text", "dropdown", "number", "email"]),
+  type: z.enum(["text", "dropdown"]),
   required: z.boolean().default(false),
   order: z.number().default(0)
 });
@@ -50,7 +50,7 @@ export const CreateFormSchema = z.object({
   questions: z.array(
     z.object({
       text: z.string().min(1, "Question text is required"),
-      type: z.enum(["text", "dropdown", "number", "email"]),
+      type: z.enum(["text", "dropdown"]),
       required: z.boolean().default(false),
       options: z.array(z.string()).optional()
     })

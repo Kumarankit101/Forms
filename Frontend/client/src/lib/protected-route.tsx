@@ -9,11 +9,9 @@ export function ProtectedRoute({
   path: string;
   component: () => React.JSX.Element;
 }) {
-  // State for authentication
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Check for authentication on component mount
   useEffect(() => {
     const checkAuth = async () => {
       try {

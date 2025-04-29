@@ -12,7 +12,7 @@ import { queryClient } from '@/lib/queryClient';
 import { apiRequest } from '@/lib/queryClient';
 import QuestionItem from '@/components/QuestionItem';
 import SuccessMessage from '@/components/SuccessMessage';
-import { useFormStore, FormQuestion } from '@/hooks/useFormStore';
+import { useFormStore } from '@/hooks/useFormStore';
 import { FormWithQuestions } from '@shared/schema';
 
 const CreateForm = () => {
@@ -22,15 +22,12 @@ const CreateForm = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const { toast } = useToast();
 
-  // Get form ID from query params or route params if editing existing form
   let formId: number | null = null;
   
-  // First check if we have a route parameter (from /edit/:id route)
   if (editMatch && editParams && editParams.id) {
     console.log("Form ID from route params:", editParams.id);
     formId = parseInt(editParams.id);
   } else {
-    // Fall back to query parameter (?id=X)
     const searchParams = new URLSearchParams(window.location.search);
     const formIdStr = searchParams.get('id');
     console.log("Form ID from URL query:", formIdStr);
@@ -39,7 +36,6 @@ const CreateForm = () => {
   
   console.log("Final parsed form ID:", formId);
 
-  // Form state using custom hook
   const {
     title,
     setTitle,
@@ -56,13 +52,11 @@ const CreateForm = () => {
     setInitialFormData,
   } = useFormStore();
 
-  // Fetch form data if editing
   const { data: formData, isLoading } = useQuery<FormWithQuestions>({
     queryKey: [`/api/forms/${formId}`],
     enabled: !!formId,
   });
 
-  // Set form data when editing existing form
   useEffect(() => {
     console.log("Form data from API:", formData);
     
@@ -70,7 +64,6 @@ const CreateForm = () => {
       console.log("Loading form data into editor:", formData);
       
       try {
-        // Convert the fetched form data to the format needed by our form store
         const formQuestions = formData.questions
           .sort((a, b) => a.order - b.order) // Make sure questions are in order
           .map(q => {
@@ -95,12 +88,9 @@ const CreateForm = () => {
         console.log("Form title:", formData.title);
         console.log("Form description:", formData.description || '');
         
-        // Reset form state before loading new data
         resetForm();
         
-        // Small delay to ensure the reset is complete before setting new data
         setTimeout(() => {
-          // Set the form data
           setInitialFormData(formData.title, formData.description || '', formQuestions);
           console.log("Form data successfully loaded into editor");
         }, 50);
@@ -116,12 +106,10 @@ const CreateForm = () => {
     }
   }, [formData, setInitialFormData, resetForm, toast]);
 
-  // Create/update form mutation
   const { mutate: saveForm, isPending } = useMutation({
     mutationFn: async () => {
       console.log("Saving form with id:", formId);
       
-      // Validate form data
       if (!title.trim()) {
         throw new Error('Form title is required');
       }
@@ -130,7 +118,6 @@ const CreateForm = () => {
         throw new Error('At least one question is required');
       }
 
-      // Check if all dropdown questions have at least one option
       const invalidQuestionIndex = questions.findIndex(
         q => q.type === 'dropdown' && (!q.options || q.options.length === 0)
       );
@@ -139,14 +126,13 @@ const CreateForm = () => {
         throw new Error(`Question ${invalidQuestionIndex + 1} needs at least one option`);
       }
 
-      // Prepare form data
       const formData = {
         form: {
           title: title.trim(),
           description: description.trim(),
         },
         questions: questions.map(q => ({
-          id: q.id, // Preserve the question ID for edited forms
+          id: q.id, 
           text: q.text.trim(),
           type: q.type,
           required: q.required,
@@ -156,7 +142,6 @@ const CreateForm = () => {
 
       console.log("Form data:", formData);
 
-      // Send request to create or update form
       const url = formId ? `/api/forms/${formId}` : '/api/forms';
       const method = formId ? 'PUT' : 'POST';
       
@@ -169,18 +154,14 @@ const CreateForm = () => {
     onSuccess: (data) => {
       console.log("Form saved successfully:", data);
       
-      // Invalidate the forms query to update the form list
       queryClient.invalidateQueries({ queryKey: ['/api/forms'] });
       
-      // Also invalidate the specific form if we're editing
       if (formId) {
         queryClient.invalidateQueries({ queryKey: [`/api/forms/${formId}`] });
       }
       
-      // Show success message
       setIsSuccess(true);
       
-      // Auto-redirect after a short delay
       setTimeout(() => {
         setIsSuccess(false);
         resetForm();

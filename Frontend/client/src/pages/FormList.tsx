@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { Link, useLocation } from 'wouter';
+import {  useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -8,7 +8,6 @@ import { formatDate } from '@/lib/utils';
 import { 
   PlusIcon, 
   EyeIcon, 
-  PencilIcon, 
   ShareIcon, 
   FileTextIcon, 
   BarChart2Icon,
@@ -23,7 +22,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import ShareFormModal from '@/components/ShareFormModal';
 import { FormWithQuestions } from '@shared/schema';
@@ -40,7 +38,7 @@ const FormList = () => {
 
   const { data: forms, isLoading, isError, refetch } = useQuery<FormWithQuestions[]>({
     queryKey: ['/api/forms'],
-    refetchInterval: 2000, // Auto-refresh every 2 seconds
+    refetchInterval: 2000, 
     refetchOnWindowFocus: true,
   });
   
@@ -51,17 +49,14 @@ const FormList = () => {
       return response;
     },
     onSuccess: () => {
-      // Show success message
       toast({
         title: 'Form deleted',
         description: 'The form has been deleted successfully',
         variant: 'default',
       });
       
-      // Refresh form list
       queryClient.invalidateQueries({ queryKey: ['/api/forms'] });
       
-      // Close delete dialog
       setIsDeleteDialogOpen(false);
     },
     onError: (error: Error) => {
@@ -74,7 +69,6 @@ const FormList = () => {
     }
   });
   
-  // Refetch data when component mounts to ensure fresh data
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -89,16 +83,15 @@ const FormList = () => {
     setIsShareModalOpen(true);
   };
 
-  const handleEdit = (id: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    console.log(`Navigating to edit form with ID: ${id}`);
+  // const handleEdit = (id: number, e: React.MouseEvent) => {
+  //   e.stopPropagation();
+  //   console.log(`Navigating to edit form with ID: ${id}`);
     
-    // Clear local storage to avoid any stale form data
-    localStorage.removeItem('formEditData');
+  //   localStorage.removeItem('formEditData');
     
-    // Navigate to edit page
-    setLocation(`/edit/${id}`);
-  };
+  //   // Navigate to edit page
+  //   setLocation(`/edit/${id}`);
+  // };
 
   const handleViewForm = (id: number) => {
     setLocation(`/form/${id}`);
@@ -258,7 +251,6 @@ const FormList = () => {
         </Button>
       </div>
 
-      {/* Share Form Modal */}
       {selectedFormId && (
         <ShareFormModal
           isOpen={isShareModalOpen}

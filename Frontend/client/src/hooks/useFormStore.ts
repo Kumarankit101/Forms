@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import type { QuestionWithOptions } from '@shared/schema';
 
 export type QuestionType = 'text' | 'dropdown';
 

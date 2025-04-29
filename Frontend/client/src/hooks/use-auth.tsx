@@ -4,11 +4,11 @@ import {
   useMutation,
   UseMutationResult,
 } from "@tanstack/react-query";
-import { UserSchema, User as SelectUser } from "@shared/schema";
+import {  User as SelectUser } from "@shared/schema";
 import { getQueryFn, apiRequest, queryClient } from "../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
-// JWT response types
+
 interface AuthResponse {
   token: string;
   user: SelectUser;

@@ -3,9 +3,6 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage.ts";
 import { z } from "zod";
 import { 
-  FormSchema, 
-  QuestionSchema, 
-  OptionSchema, 
   ResponseSchema,
   CreateFormSchema
 } from "@shared/schema.ts";

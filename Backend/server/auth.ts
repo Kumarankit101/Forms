@@ -3,7 +3,6 @@ import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 import jwt from "jsonwebtoken";
 import { storage } from "./storage.ts";
-import { User as SelectUser, InsertUser } from "@shared/schema.ts";
 
 // Define JWT secret key
 const JWT_SECRET = process.env.JWT_SECRET || "jwt-form-builder-secret-key";
